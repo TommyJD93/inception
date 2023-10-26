@@ -1,6 +1,5 @@
 
-echo "VM setup will begin in 5 seconds..."
-sleep 5
+echo "Starting VM setup..."
 
 echo "updating apt..."
 @sudo apt update 2> /dev/null
@@ -20,12 +19,19 @@ echo "installing vim..."
 echo "installing vscode..."
 @sudo apt install -y vscode 2> /dev/null
 
+echo "Replacing localhost with tterribi.42.fr"
+#sudo echo "127.0.0.1	tterribi.42.fr" >> /etc/hosts
+@sudo -- sh -c -e "echo '127.0.0.1	tterribi.42.fr' >> /etc/hosts"
+
+echo "base setup finished, starting docker setup..."
+
 # Docker setup
 
 # Add Docker's official GPG key:
+echo "adding Docker's official GPG key..."
 sudo apt update -y 2> /dev/null
 sudo apt install -y ca-certificates curl gnupg 2> /dev/null
-sudo install -m 0755 -d /etc/apt/keyrings
+sudo install -y -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
@@ -34,10 +40,17 @@ echo \
   "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
   "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-sudo apt-get update -y 2> /dev/null
+  sudo apt update -y 2> /dev/null
 
+echo "installing docker packages..."
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2> /dev/null
 
 
 echo "installing docker..."
 @sudo apt install -y docker 2> /dev/null
+
+echo "Setup completed rboot in 5 seconds..."
+sleep 5
+
+sudo reboot
+
