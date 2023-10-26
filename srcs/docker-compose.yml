@@ -1,0 +1,39 @@
+networks:
+  inception:
+  
+services:
+  mariadb:
+    image: i-mariadb:1.0.0
+    env_file:
+      - .env
+    build:
+      - 
+    volumes:
+      -
+    networks:
+      - inception
+  nginx:
+    image: i-nginx:1.0.0
+    build:
+    ports:
+      - "443:443"
+    env_file:
+      - .env
+    volumes:
+      -
+    networks:
+      - inception
+    
+  wordpress:
+    image: i-wordpress:1.0.0
+    build:
+      -
+    volumes:
+      -
+    env_file:
+      - .env
+    networks:
+      - inception
+
+
+volumes:
