@@ -1,4 +1,16 @@
 
+# shell colors
+
+$RESET= "\e[1;40m"
+$BLACK= "\e[1;40m"
+$RED= "\e[1;42m"
+$GREEN= "\e[1;42m"
+$YELLOW= "\e[1;43m"
+$BLUE= "\e[1;44m"
+$MAGENTA= "\e[1;45m"
+$CYAN= "\e[1;46m"
+$WHITE= "\e[1;47m"
+
 echo "Starting VM setup..."
 
 echo "updating apt..."
