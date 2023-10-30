@@ -3,33 +3,32 @@ networks:
   
 services:
   mariadb:
-    image: i-mariadb:1.0.0
+    image: "i-mariadb:1.0.0"
     env_file:
       - .env
-    build:
-      - 
+    build: ./requirements/mariadb 
     volumes:
-      -
+      - mariadb_data:/data/
     networks:
       - inception
   nginx:
-    image: i-nginx:1.0.0
-    build:
+    image: "i-nginx:1.0.0"
+    build: ./requirements/nginx
     ports:
       - "443:443"
     env_file:
       - .env
     volumes:
-      -
+      - wordpress_data:/var/www/htmp/
     networks:
       - inception
     
   wordpress:
-    image: i-wordpress:1.0.0
+    image: "i-wordpress:1.0.0"
     build:
-      -
+      - ./requirements/wordpress
     volumes:
-      -
+      - wordpress_data:/var/www/html
     env_file:
       - .env
     networks:
