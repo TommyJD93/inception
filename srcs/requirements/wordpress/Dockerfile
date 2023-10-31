@@ -1,6 +1,6 @@
-FROM alpint:3.17.5
+FROM alpine:3.17
 
-RUN
+RUN apk add curl php-fpm php-curl pph-mysqli php-openssl php-dom php-xml
 
 COPY ./tools/steup.sh /usr/local/bin/
 
