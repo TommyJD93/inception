@@ -25,9 +25,10 @@ else
   echo "[Inception-Wordpress] Setting up Wordpress website and users"
   php wp-cli.phar core install --url=$DOMAIN_NAME/ --title=$WORDPRESS_TITLE --admin_user=$WORDPRESS_ADMIN_USERNAME --admin_password=$WORDPRESS_ADMIN_PASSWORD --admin_email=$WORDPRESS_ADMIN_EMAIL --skip-email --allow-root
   php wp-cli.phar user create $WORDPRESS_USER_USERNAME $WORDPRESS_USER_EMAIL --role=author --user_pass=$WORDPRESS_USER_PASSWORD --allow-root
-
+fi
 echo "[Wordpress] Updating PHP-FPM configuration"
 sed "s/127.0.0.1:9000/0.0.0.0:9000/1" -i -r /etc/php81/php-fpm.d/www.conf
 
 echo "[Inception-Wordpress] Starting PHP-FPM"
 /usr/sbin/php-fpm81 -F
+

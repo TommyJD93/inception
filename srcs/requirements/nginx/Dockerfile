@@ -9,4 +9,4 @@ RUN mkdir -p /etc/nginx/http.d/
 COPY conf/default.conf/ /etc/nginx/http.d/
 COPY tools/setup.sh /user/local/bin/
 
-ENTRYPOINT ["bin/sh", "usr/local/bin/setup.sh"]
+ENTRYPOINT ["bin/bash", "usr/local/bin/setup.sh"]
