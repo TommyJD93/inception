@@ -1,37 +1,37 @@
-networks:
+﻿networks:
   inception:
-  
+
+volumes:
+  wordpress_data:
+  mariadb_data:
+
 services:
   mariadb:
     image: "i-mariadb:1.0.0"
-    env_file:
-      - .env
-    build: ./requirements/mariadb 
+    build: ./requirements/mariadb
     volumes:
       - mariadb_data:/data/
+    env_file:
+      - .env
     networks:
       - inception
-   wordpress:
-    image: "i_wordpress:1.0.0"
-    build: 
-       - ./requirements/wordpress
-    volumes:
-       - wordpress_data:/var/www/html
+  wordpress:
+    image: "i-wordpress:1.0.0"
+    build: ./requirements/wordpress
     env_file:
-       - .env
+      - .env
+    volumes:
+      - wordpress_data:/var/www/html/
     networks:
-       - inception
-   nginx:
+      - inception
+  nginx:
     image: "i-nginx:1.0.0"
     build: ./requirements/nginx
     ports:
-      - "443:443"
+     - "443:443"
     env_file:
       - .env
     volumes:
-      - wordpress_data:/var/www/htmp/
+      - wordpress_data:/var/www/html/
     networks:
       - inception
-
-
-volumes:

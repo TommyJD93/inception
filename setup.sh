@@ -14,22 +14,22 @@ $WHITE= "\e[1;47m"
 echo "Starting VM setup..."
 
 echo "updating apt..."
-@sudo apt update 2> /dev/null
+sudo apt update 2> /dev/null
 
 echo "upgrading apt packages..."
-@sudo apt upgrade -y 2> /dev/null
+sudo apt upgrade -y 2> /dev/null
 
 echo "installing git..."
-@sudo apt install -y git 2> /dev/null
+sudo apt install -y git 2> /dev/null
 
 echo "installing make..."
-@sudo apt install -y make 2> /dev/null
+sudo apt install -y make 2> /dev/null
 
 echo "installing vim..."
 sudo apt install -y vim 2> /dev/null 
 
 echo "installing vscode..."
-@sudo apt install -y vscode 2> /dev/null
+sudo apt install -y vscode 2> /dev/null
 
 echo "Replacing localhost with gfezzuog.42.fr"
 #sudo echo "127.0.0.1	gfezzuog.42.fr" >> /etc/hosts
@@ -59,7 +59,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 
 
 echo "installing docker..."
-@sudo apt install -y docker 2> /dev/null
+sudo apt install -y docker 2> /dev/null
 
 echo "Setup completed rboot in 5 seconds..."
 sleep 5
