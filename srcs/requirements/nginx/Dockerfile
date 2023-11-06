@@ -7,6 +7,6 @@ RUN mkdir -p /etc/ssl
 RUN mkdir -p /etc/nginx/http.d/
 
 COPY conf/default.conf/ /etc/nginx/http.d/
-COPY tools/setup.sh /user/local/bin/
+COPY tools/setup.sh /usr/local/bin/
 
-ENTRYPOINT ["bin/bash", "usr/local/bin/setup.sh"]
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/setup.sh"]

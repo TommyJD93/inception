@@ -4,9 +4,9 @@ EXPOSE 3306
 
 RUN apk add mysql mysql-client
 
-COPY tools/setup.sh /user/local/bin/
+COPY tools/setup.sh /usr/local/bin/
 
 RUN mkdir /run/mysqld
 
-ENTRYPOINT ["/bin/bash", "/usr/local/bin/setup.sh"]
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/setup.sh"]
 
