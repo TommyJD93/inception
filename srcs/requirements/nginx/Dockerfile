@@ -7,7 +7,8 @@ RUN mkdir -p /etc/ssl/
 RUN mkdir -p /etc/nginx/
 
 COPY ./tools/setup.sh /usr/local/bin/
-
-ENTRYPOINT ["/bin/sh", "/usr/local/bin/setup.sh"]
+COPY ./config/nginx.conf /etc/nginx/sites-available/
 
 EXPOSE 443
+
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/setup.sh"]
