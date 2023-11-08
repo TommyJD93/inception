@@ -4,7 +4,7 @@ RUN apk add curl php php-fpm php-mysqli php-curl php-dom php-exif php-fileinfo p
 RUN apk add php8-pecl-redis --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/
 RUN mkdir -p /var/www/html
 
-COPY ./tools/steup.sh /usr/local/bin/
+COPY ./tools/setup.sh /usr/local/bin/
 
 EXPOSE 9000
 

@@ -1,4 +1,3 @@
-
 # shell colors
 
 $RESET= "\e[1;40m"
@@ -27,6 +26,9 @@ echo "installing make..."
 
 echo "installing vim..."
 @sudo apt install -y vim 2> /dev/null
+
+echo "installing screen..."
+@sudo apt install -y screen 2> /dev/null
 
 echo "installing vscode..."
 @sudo apt install -y vscode 2> /dev/null

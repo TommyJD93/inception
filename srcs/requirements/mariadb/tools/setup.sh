@@ -12,4 +12,4 @@ echo "[DB] reboot..."
 kill $SQL_PID
 wait $SQL_PID
 
-mysqld --bind-adress=0.0.0.0 --user=root --datadir=/data --dkip-networking=0
+mysqld --bind-address=0.0.0.0 --user=root --datadir=/data --skip-networking=0
