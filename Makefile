@@ -13,7 +13,10 @@ vclean:
 	sudo docker volume rm -f srcs_mariadb_data
 
 iclean:
+ifneq (,$(wildcard ./nohup.out))
 	rm nohup.out
+endif
+
 	sudo docker image rm i-mariadb:1.0.0
 	sudo docker image rm i-nginx:1.0.0
 	sudo docker image rm i-wordpress:1.0.0
