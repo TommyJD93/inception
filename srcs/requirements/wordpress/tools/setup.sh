@@ -4,6 +4,8 @@
 #	sleep 3
 #done
 
+cd /var/www/html
+
 if [ ! -f "/var/www/html/index.html" ]; then
 	echo "[WP Container] It seems that wp-cli isn't installed, installing it right now..."
 	
@@ -16,7 +18,30 @@ if [ ! -f "/var/www/html/index.html" ]; then
 
 	wp core download --allow-root
 	echo "[WP Container] wp-cli installed and updated!"
+
+	wp config create \
+		--dbname=${MYSQL_WORDPRESS_DATABASE} \
+		--dbuser=${MYSQL_USERNAME} \
+		--dbpass=${MYSQL_PASSWORD} \
+		--dbhost=${MYSQL_HOST} \
+		--dbcollate="utf8_general_ci" \
+		--allow-root
+	
+	wp core install \
+		--url=${DOMAIN_NAME}/wordpress \
+		--title=${WORDPRESS_TITLE} \
+		--admin_user=${WORDPRESS_ADMIN_NAME} \
+		--admin_password=${WORDPRESS_ADMIN_PASSWORD} \
+		--admin_email=${WORDPRESS_ADMIN_EMAIL} \
+		--skip-email \
+		--locale= it_IT \
+		--allow-root
+
+	wp user create ${WORDPRES_USER_NAME} ${WORDPRESS_USER_EMAIL} \
+		--role=subscriber \
+		--user_pass=${WORDPRESS_USER_PASSWORD} \
+		--allow-root
 fi
 
-tail -f /dev/null
-
+echo "[WP Contaier] starting php-fpm"
+/usr/sbin/php-fpm7 -F R
