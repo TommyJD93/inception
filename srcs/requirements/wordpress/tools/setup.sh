@@ -1,14 +1,18 @@
 #!/bin/sh
 
-#while ! mariadb -h${MYSQL_HOSTNAME} -u${MYSQL_USERNAME} -p${MYSQL_PASSWORD} ${MYSQL_WORDPRESS_DATABASE} 2> /dev/null; do
-#	sleep 3
-#done
+while ! mariadb -h${MYSQL_HOSTNAME} -u${MYSQL_USERNAME} -p${MYSQL_PASSWORD} ${MYSQL_WORDPRESS_DATABASE} &> /dev/null; do
+	echo "waiting for mariadb..."
+	sleep 3
+done
 
 cd /var/www/html
 
 if [ ! -f "/var/www/html/index.html" ]; then
 	echo "[WP Container] It seems that wp-cli isn't installed, installing it right now..."
-	
+
+	echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+	echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+
 	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	php wp-cli.phar --info
 
