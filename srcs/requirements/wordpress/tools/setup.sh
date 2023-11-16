@@ -1,6 +1,6 @@
 #!/bin/sh
 
-while ! mariadb -h${MYSQL_HOSTNAME} -u${MYSQL_USERNAME} -p${MYSQL_PASSWORD} ${MYSQL_WORDPRESS_DATABASE} &> /dev/null; do
+while ! mysql -h${MYSQL_HOSTNAME} -u${MYSQL_USERNAME} -p${MYSQL_PASSWORD} ${MYSQL_WORDPRESS_DATABASE} -e ";" &> /dev/null; do
 	echo "waiting for mariadb..."
 	sleep 3
 done
@@ -23,12 +23,12 @@ if [ ! -f "/var/www/html/index.html" ]; then
 	wp core download --allow-root
 	echo "[WP Container] wp-cli installed and updated!"
 
-	wp config create \
-		--dbname=${MYSQL_WORDPRESS_DATABASE} \
-		--dbuser=${MYSQL_USERNAME} \
-		--dbpass=${MYSQL_PASSWORD} \
-		--dbhost=${MYSQL_HOST} \
-		--dbcollate="utf8_general_ci" \
+	wp config create 							\
+		--dbname=${MYSQL_WORDPRESS_DATABASE} 	\
+		--dbuser=${MYSQL_USERNAME}			 	\
+		--dbpass=${MYSQL_PASSWORD} 				\
+		--dbhost=${MYSQL_HOSTNAME} 					\
+		--dbcollate="utf8_general_ci" 			\
 		--allow-root
 	
 	wp core install \
@@ -38,14 +38,13 @@ if [ ! -f "/var/www/html/index.html" ]; then
 		--admin_password=${WORDPRESS_ADMIN_PASSWORD} \
 		--admin_email=${WORDPRESS_ADMIN_EMAIL} \
 		--skip-email \
-		--locale= it_IT \
 		--allow-root
 
-	wp user create ${WORDPRES_USER_NAME} ${WORDPRESS_USER_EMAIL} \
+	wp user create ${WORDPRESS_USER_NAME} ${WORDPRESS_USER_EMAIL} \
 		--role=subscriber \
 		--user_pass=${WORDPRESS_USER_PASSWORD} \
 		--allow-root
 fi
 
 echo "[WP Contaier] starting php-fpm"
-/usr/sbin/php-fpm7 -F R
+/usr/sbin/php-fpm81 -F -R

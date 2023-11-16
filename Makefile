@@ -4,7 +4,6 @@ $(NAME): run
 
 run:
 	@nohup gnome-terminal -- sudo docker compose -f ./srcs/docker-compose.yml up --build 2> /dev/null
-
 down:
 	sudo docker compose -f ./srcs/docker-compose.yml down
 
