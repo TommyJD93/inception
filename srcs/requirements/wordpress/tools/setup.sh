@@ -32,7 +32,7 @@ if [ ! -f "/var/www/html/index.html" ]; then
 		--allow-root
 	
 	wp core install \
-		--url=${DOMAIN_NAME}/wordpress \
+		--url=${DOMAIN_NAME} \
 		--title=${WORDPRESS_TITLE} \
 		--admin_user=${WORDPRESS_ADMIN_NAME} \
 		--admin_password=${WORDPRESS_ADMIN_PASSWORD} \
@@ -44,6 +44,7 @@ if [ ! -f "/var/www/html/index.html" ]; then
 		--role=subscriber \
 		--user_pass=${WORDPRESS_USER_PASSWORD} \
 		--allow-root
+
 fi
 
 sed "s/127.0.0.1:9000/0.0.0.0:9000/1" -i -r /etc/php81/php-fpm.d/www.conf
