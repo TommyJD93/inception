@@ -27,7 +27,7 @@ if [ ! -f "/var/www/html/index.html" ]; then
 		--dbname=${MYSQL_WORDPRESS_DATABASE} 	\
 		--dbuser=${MYSQL_USERNAME}			 	\
 		--dbpass=${MYSQL_PASSWORD} 				\
-		--dbhost=${MYSQL_HOSTNAME} 					\
+		--dbhost=${MYSQL_HOSTNAME} 				\
 		--dbcollate="utf8_general_ci" 			\
 		--allow-root
 	
